@@ -1,0 +1,33 @@
+name: Trigger Assign Discord Role Workflow
+
+on:
+  pull_request:
+    types: [closed]
+  issues:
+    types: [opened]
+  push:
+    branches:
+      - main
+#test
+jobs:
+  assign-role:
+    uses: yashitz07/GitHub-Actions-workflow/.github/workflows/discord-role.yml@main
+    with:
+      ACTOR: ${{ github.actor }}
+      GITHUB_EVENT_NAME: ${{ github.event_name }}
+      GITHUB_EVENT_ACTION: ${{ github.event.action }}
+    secrets:
+      DISCORD_BOT_TOKEN: ${{ secrets.DISCORD_BOT_TOKEN }}
+      FIREBASE_CREDENTIALS_JSON: ${{ secrets.FIREBASE_CREDENTIALS_JSON }}
+      GUILD_ID: ${{ secrets.GUILD_ID }}
+      GH_STATS_TOKEN: ${{ secrets.GH_STATS_TOKEN }}
+
+      ROLE_ID_PR_1: ${{ secrets.ROLE_ID_PR_1 }}
+      ROLE_ID_PR_5: ${{ secrets.ROLE_ID_PR_5 }}
+      ROLE_ID_PR_10: ${{ secrets.ROLE_ID_PR_10 }}
+
+      ROLE_ID_ISSUE_1: ${{ secrets.ROLE_ID_ISSUE_1 }}
+      ROLE_ID_ISSUE_5: ${{ secrets.ROLE_ID_ISSUE_5 }}
+
+      ROLE_ID_COMMIT_1: ${{ secrets.ROLE_ID_COMMIT_1 }}
+      ROLE_ID_COMMIT_15: ${{ secrets.ROLE_ID_COMMIT_15 }}
